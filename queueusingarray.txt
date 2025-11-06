@@ -1,0 +1,94 @@
+#include<iostream>
+using namespace std;
+const int MAX=5;
+class queue
+{
+    private:
+    int a[MAX];
+    int front;
+    int rear;
+    public:
+    queue()
+    {
+        front=-1;
+        rear=-1;
+    }
+    int empty(void)
+    {
+        if(front==-1&& rear==-1)
+        return(1);
+        else return(0);
+    }
+    int full(void)
+    { 
+        if(rear==MAX-1)
+        return(1);
+        else return(0);
+    }
+    void enqueue (int x)
+    {
+        if(front==-1 && rear==-1)
+        {
+            front++;
+            rear++;
+        }
+        else
+        {
+            rear++;
+        }
+        a[rear]=x;
+    }    
+    int dequeue(void)
+    {
+        int x=a[front];
+        if(front==rear)
+        {
+            front=-1;
+            rear=-1;
+        }
+        else
+    
+        {
+            front++;
+        }
+        return(x);
+    }
+    int peek(void)
+    {
+        return(a[front]);
+    }
+    void display(void)
+    {
+        cout <<"\n";
+        for(int i=front;i<rear; i++)
+        cout<<"\t"<<a[i];
+    }
+};
+int main()
+{
+   int x;
+   queue q;
+    if(!q.full()) q.enqueue(50);
+    if(!q.full()) q.enqueue(20);
+    if(!q.full()) q.enqueue(30);
+    if(!q.full()) q.enqueue(40);
+    if(!q.full()) q.enqueue(10);
+    q.display();
+
+    if(!q.empty())
+    { 
+        x=q.dequeue();
+        cout<<endl<<"remove element"<<"x";
+    }
+    q.display();
+    x=q.peek();
+    cout<<endl<<"front element"<<"x";
+}
+
+/*PS D:\prapti_kale> cd "d:\prapti_kale\" ; if ($?) { g++ queuearray.cpp -o queuearray } ; if ($?) { .\queuearray }
+
+        50      20      30      40
+remove elementx
+        20      30      40
+front elementx
+PS D:\prapti_kale>*/
