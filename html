@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My C++ Projects</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #222;
+    }
+    #fileList {
+      max-width: 700px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .file {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .file a {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: 500;
+    }
+    .file a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>My C++ Projects</h1>
+  <div id="fileList">Loading files...</div>
+
+  <footer>© 2025 Your Name | <a href="https://github.com/YOUR-USERNAME">GitHub</a></footer>
+
+  <script>
+    const username = "YOUR-USERNAME";
+    const repo = "cpp-projects";
+    const apiUrl = https://api.github.com/repos/${username}/${repo}/contents;
+
+    async function loadFiles() {
+      const response = await fetch(apiUrl);
+      const files = await response.json();
+
+      const cppFiles = files.filter(f => f.name.endsWith(".cpp"));
+      const container = document.getElementById("fileList");
+
+      if (cppFiles.length === 0) {
+        container.innerHTML = "<p>No C++ files found yet.</p>";
+        return;
+      }
+
+      container.innerHTML = cppFiles
+        .map(f => `
+          <div class="file">
+            <a href="${f.html_url}" target="_blank">${f.name}</a>
+          </div>
+        `)
+        .join("");
+    }
+
+    loadFiles();
+  </script>
+</body>
+</html>
